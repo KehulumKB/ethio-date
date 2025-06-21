@@ -16,4 +16,5 @@
         <p>{{ $conversionError }}</p>
     </div>
     @endif
+    <p>Gregorian Date: {{ $formattedGregorianDate }}</p>
 </div>
