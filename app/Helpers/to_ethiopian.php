@@ -5,6 +5,6 @@ if (!function_exists('to_ethiopian_date')) {
     {
         $converter = app('ethiopian-date');
         $ethiopianDate = $converter->gregorianToEthiopian($date);
-        return $converter->formatEthiopian($ethiopianDate, $format);
+        return $converter->formatEthiopianDate($ethiopianDate, $format);
     }
 }
