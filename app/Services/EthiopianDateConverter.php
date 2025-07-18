@@ -94,34 +94,4 @@ class EthiopianDateConverter
         ];
     }
 
-    // public function verifyConversion()
-    // {
-    //     $testDate = '2025-06-21';
-    //     $result = $this->gregorianToEthiopian($testDate);
-
-    //     $expected = [
-    //         'year' => 2017,
-    //         'month' => 10,
-    //         'day' => 14,
-    //         'dayName' => 'Kidame' // Saturday
-    //     ];
-
-    //     if (
-    //         $result['year'] != $expected['year'] ||
-    //         $result['month'] != $expected['month'] ||
-    //         $result['day'] != $expected['day'] ||
-    //         $result['dayName'] != $expected['dayName']
-    //     ) {
-    //         throw new \RuntimeException(sprintf(
-    //             "Conversion failed! Expected Sene 14 2017 (%s), got %s %d %d (%s)",
-    //             $expected['dayName'],
-    //             $result['monthName'],
-    //             $result['day'],
-    //             $result['year'],
-    //             $result['dayName']
-    //         ));
-    //     }
-
-    //     return $result;
-    // }
 }

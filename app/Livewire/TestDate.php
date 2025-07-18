@@ -13,20 +13,13 @@ class TestDate extends Component
 
     public function mount()
     {
-        $converter = new \App\Services\EthiopianDateConverter();
+        $converter = new EthiopianDateConverter();
 
         try {
-            // First verify the conversion works
-            // $testResult = $converter->verifyConversion();
-
             // Now convert current date
-            $this->currentDate = '2025-07-1';
+            $this->currentDate = '2025-07-22';
             $this->ethiopicDate = $converter->gregorianToEthiopian($this->currentDate);
-
-            // Should output: Sene 14, 2017 (Kidame)
-            // dump($this->ethiopicDate);
         } catch (\RuntimeException $e) {
-            // Handle conversion error
             dd($e->getMessage());
         }
     }
