@@ -89,35 +89,33 @@ class EthiopianDateConverter
             throw new \InvalidArgumentException("Invalid Ethiopian day: $day for month $month");
         }
 
-        // Adjust the Ethiopian year to Julian calendar offset
-        $epoch = self::JD_EPOCH_OFFSET_AMETE_MIHRET;
+        $JD_EPOCH_OFFSET_AMETE_MIHRET = 1723856;
 
-        $isLeapYear = $year % 4 === 3;
-        $daysInYear = 365 + ($isLeapYear ? 1 : 0);
+        $jd = $JD_EPOCH_OFFSET_AMETE_MIHRET
+            + 365 * $year
+            + intdiv($year, 4)
+            + 30 * ($month - 1)
+            + ($day - 1);
 
-        $yearsPassed = $year - 1;
-        $daysFromEpoch = $yearsPassed * 365 + intdiv($yearsPassed, 4);
-        $daysFromEpoch += ($month - 1) * 30 + ($day - 1);
+        [$gYear, $gMonth, $gDay] = $this->julianDayToGregorian($jd);
 
-        $julianDay = $epoch + $daysFromEpoch;
-
-        return $this->julianToGregorian($julianDay);
+        return new \DateTime(sprintf('%04d-%02d-%02d', $gYear, $gMonth, $gDay));
     }
 
-    private function julianToGregorian(int $jd): \DateTime
+
+    private function julianDayToGregorian(int $jd): array
     {
-        $a = $jd + 32044;
-        $b = intdiv(4 * $a + 3, 146097);
-        $c = $a - intdiv(146097 * $b, 4);
+        $l = $jd + 68569;
+        $n = intdiv(4 * $l, 146097);
+        $l = $l - intdiv((146097 * $n + 3), 4);
+        $i = intdiv(4000 * ($l + 1), 1461001);
+        $l = $l - intdiv(1461 * $i, 4) + 31;
+        $j = intdiv(80 * $l, 2447);
+        $day = $l - intdiv(2447 * $j, 80);
+        $l = intdiv($j, 11);
+        $month = $j + 2 - 12 * $l;
+        $year = 100 * ($n - 49) + $i + $l;
 
-        $d = intdiv(4 * $c + 3, 1461);
-        $e = $c - intdiv(1461 * $d, 4);
-        $m = intdiv(5 * $e + 2, 153);
-
-        $day = $e - intdiv(153 * $m + 2, 5) + 1;
-        $month = $m + 3 - 12 * intdiv($m, 10);
-        $year = 100 * $b + $d - 4800 + intdiv($m, 10);
-
-        return new \DateTime(sprintf('%04d-%02d-%02d', $year, $month, $day));
+        return [$year, $month, $day];
     }
 }
