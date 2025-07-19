@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->singleton('ethiopian-date', function () {
+        $this->app->singleton('date_converter', function () {
             return new EthiopianDateConverter();
         });
     }

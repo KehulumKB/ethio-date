@@ -20,8 +20,8 @@ class TestDate extends Component
             $this->currentDate = '2025-07-19';
             $this->ethiopicDate = $converter->gregorianToEthiopian($this->currentDate);
 
-            $gregorianDate = $converter->ethiopianToGregorian(1984, 1, 12);
-            dd($gregorianDate->format('Y-m-d'));
+            $gregorianDate = $converter->ethiopianToGregorian(1985, 8, 1);
+            // dd($gregorianDate->format('Y-m-d'));
         } catch (\RuntimeException $e) {
             dd($e->getMessage());
         }

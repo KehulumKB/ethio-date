@@ -118,4 +118,20 @@ class EthiopianDateConverter
 
         return [$year, $month, $day];
     }
+
+    public function formatEthiopian(array $ethiopianDate, string $format = 'd/m/Y'): string
+    {
+        $day = str_pad($ethiopianDate['day'], 2, '0', STR_PAD_LEFT);
+        $month = str_pad($ethiopianDate['month'], 2, '0', STR_PAD_LEFT);
+        $year = $ethiopianDate['year'];
+
+        // Replace format tokens
+        $formatted = str_replace(
+            ['d', 'm', 'Y'],
+            [$day, $month, $year],
+            $format
+        );
+
+        return $formatted;
+    }
 }
