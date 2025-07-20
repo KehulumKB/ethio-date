@@ -63,7 +63,7 @@ class EthiopianDateConverter
             $day = $dayOfYear - 360;
         }
 
-        // FINALLY CORRECT Day of week calculation
+        // CORRECT Day of week calculation
         // The Ethiopian week starts with Ehud (Sunday) = 0
         // We need to add 2 days offset from Julian day to align with Ethiopian week
         $dayOfWeek = ($daysSinceEpoch + 2) % 7;
@@ -101,7 +101,6 @@ class EthiopianDateConverter
 
         return new \DateTime(sprintf('%04d-%02d-%02d', $gYear, $gMonth, $gDay));
     }
-
 
     private function julianDayToGregorian(int $jd): array
     {

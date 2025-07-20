@@ -19,6 +19,7 @@ class TestDate extends Component
             // Now convert current date
             $this->currentDate = '2025-07-19';
             $this->ethiopicDate = $converter->gregorianToEthiopian($this->currentDate);
+            dd($converter->formatEthiopian($this->ethiopicDate));
 
             $gregorianDate = $converter->ethiopianToGregorian(1985, 8, 1);
             // dd($gregorianDate->format('Y-m-d'));
